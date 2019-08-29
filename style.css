@@ -1,0 +1,39 @@
+table, tr, td {
+    border: 1px solid black;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    font-size: .8vw;
+    font-weight: bold;
+}
+table {
+    position: relative;
+    width: 100%;
+}
+.first {
+    background-color: tomato;
+}
+.second {
+    background-color: dodgerblue;
+}
+.third {
+    background-color: yellow;
+}
+.fourth {
+    background-color: orange;
+}
+.fifth {
+    background-color: mediumseagreen;
+}
+.sixth {
+    background-color: white;
+}
+.seventh {
+    background-color: grey;
+}
+.eigth {
+    background-color: pink;
+}
+#lunch {
+    height: 30px;
+}
