@@ -8,10 +8,13 @@
         <header>
             <h1 class="pHeader">Paste your classes down below</h1>
             <textarea type="text"  class="pHeader" id="textfield" placeholder="Paste your classes" rows="15" cols="75"></textarea>
+            <br class="pHeader">
+            <br class="pHeader">
             <button class="pHeader" id="button" onclick="implementClass()">Submit</button>
+            <div id="errorPlacement" class="pHeader"></div>
             <h3 class="sHeader" hidden>Here is your schedule</h3><br class="sHeader" hidden>
             <strong class="sHeader" hidden>If you can't see the full schedule, expand the window or use a different device with a larger screen</strong><br class="sHeader" hidden>
-            <strong class="sHeader" hidden>Take a screenshot of the schedule</strong>
+            <strong class="sHeader" hidden>Feel free to take a screenshot of the schedule</strong>
         </header>
         <br>
         <main>
@@ -102,9 +105,13 @@
     window.onload = function() {
         document.getElementsByTagName("table")[0].style.visibility = "hidden"
     }
+
     function implementClass() {
         for(i=0;i<document.getElementsByTagName("TD").length;i++) {
             document.getElementsByTagName("TD")[i].innerHTML = ""
+        }
+        if(document.getElementById("errorMessage")) {
+            document.getElementById("errorMessage").style.display = "none"
         }
         var textfield = document.getElementById("textfield")
         var classes = textfield.value.split('\n');
@@ -147,5 +154,41 @@
         }
         document.getElementsByTagName("table")[0].style.visibility = "visible"
         textfield.value = null
+        var errorInSchedule = checkForErrors()
+        if(errorInSchedule) {
+            document.getElementsByTagName("table")[0].style.visibility = "hidden"
+            var header = document.getElementsByClassName("pHeader")
+            for(i=0;i<header.length;i++) {
+                header[i].style.display = "block"
+            }
+            var sHeader = document.getElementsByClassName("sHeader")
+            for(i=0;i<sHeader.length;i++) {
+                sHeader[i].style.display = "none"
+            }
+             if(document.getElementById("errorMessage")) {
+                 document.getElementById("errorMessage").style.display = "block"
+             } else {
+                 var errorHeading = document.createElement("h3")
+                 errorHeading.setAttribute("style", "color:red")
+                 errorHeading.setAttribute("id", "errorMessage")
+                 errorHeading.innerHTML = "Your schedule did not generate properly. Please try copying your schedule as instructed"
+                 document.getElementById("errorPlacement").appendChild(errorHeading)
+             }
+        }
+    }
+
+    function checkForErrors() {
+        var errorInSchedule = true
+        for(i=0;i<document.getElementsByTagName("TD").length;i++) {
+            if(!document.getElementsByTagName("TD")[i].innerHTML.includes("Free") && document.getElementsByTagName("TD")[i].innerHTML != "Lunch") {
+                errorInSchedule = false
+            }
+        }
+        for(i=0;i<document.getElementsByTagName("TD").length;i++) {
+            if(document.getElementsByTagName("TD")[i].innerHTML.includes("undefined")) {
+               errorInSchedule = true
+            }
+        }
+        return errorInSchedule
     }
 </script>
