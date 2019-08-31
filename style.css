@@ -5,6 +5,8 @@ table, tr, td {
     text-align: center;
     font-size: .8vw;
     font-weight: bold;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
 }
 table {
     position: relative;
@@ -36,4 +38,15 @@ table {
 }
 #lunch {
     height: 30px;
+}
+@page {
+    size: landscape;
+}
+@media print {
+    body {
+        visibility: hidden;
+    }
+    table {
+        visibility: visible;
+    }
 }
