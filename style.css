@@ -8,6 +8,9 @@ table, tr, td {
     -webkit-print-color-adjust: exact;
     color-adjust: exact;
 }
+body {
+    background-color: 3260FF;
+}
 table {
     position: relative;
     width: 100%;
